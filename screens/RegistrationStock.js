@@ -12,13 +12,13 @@ import {
   Button,
   Image
 } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
+
 import { ImagePicker, Permissions } from "expo";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { connect } from "react-redux";
-import { FlatList } from "react-native-gesture-handler";
+
 import _ from "lodash";
-import Entypo from "@expo/vector-icons/Entypo";
+
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 class RegistrationStock extends React.Component {
