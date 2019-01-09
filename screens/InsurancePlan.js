@@ -1,7 +1,7 @@
+// 설계사 일정 추가히기 누르면 나오는 화면 (미완성화면 :  완성해야하나 말아야하나...) -> 오래걸릴듯함.
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { LocaleConfig } from "react-native-calendars";
 
 export default class InsurancePlan extends React.Component {
   render() {

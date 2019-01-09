@@ -58,59 +58,15 @@ class RegistrationStock extends React.Component {
     var insuranceCo = this.props.navigation.getParam("insuranceCo");
     var UserInsuranceID = this.props.navigation.getParam("UserInsuranceID");
 
-    // name: item.name,
-    // startDay: item.startDay,
-    // insuranceCo: item.insuranceCo,
-    // UserInsuranceID: item.UserInsuranceID
-
     return (
       <ScrollView style={styles.container}>
-        <View
-          style={{
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <View
-            style={{
-              height: 70,
-              width: "90%",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row",
-              borderColor: "#D8D8D8",
-              borderWidth: 1,
-              borderRadius: 10,
-              marginTop: 20
-            }}
-
-            // name: "국민 행복 암 보험",
-            // startDay: "18.06.29",
-            // contractor: "김정수",
-            // insured: " 김정수",
-            // price: "10000",
-            // insuranceCo: "메리츠"
-          >
+        <View style={styles.viewBox}>
+          <View style={styles.insuranceContentBox}>
             <Image
-              style={{
-                width: 50,
-                height: 50,
-                position: "absolute",
-                left: 15,
-                borderColor: "#E6E6E6",
-                borderWidth: 1,
-                borderRadius: 10
-              }}
+              style={styles.imageStyle}
               source={{ uri: this.companyLogo(insuranceCo) }}
             />
-            <View
-              style={{
-                width: "100%",
-                paddingLeft: 90,
-                flexDirection: "column"
-              }}
-            >
+            <View style={styles.boxInBox}>
               <Text style={{ fontSize: 18 }}>{name}</Text>
               <Text style={{ fontSize: 13, marginTop: 3 }}>{startDay}</Text>
             </View>
@@ -120,14 +76,7 @@ class RegistrationStock extends React.Component {
             />
           </View>
         </View>
-        <View
-          style={{
-            flex: 1,
-            paddingTop: 20,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
+        <View style={styles.stockstyle}>
           <View style={{ width: 300, height: 300 }}>
             <Image
               source={{ uri: image }}
@@ -135,50 +84,16 @@ class RegistrationStock extends React.Component {
             />
 
             <TouchableOpacity
-              style={{
-                backgroundColor: "white",
-                width: 50,
-                height: 50,
-                position: "absolute",
-                borderColor: "#D8D8D8",
-                borderWidth: 1,
-                bottom: 0,
-                right: 0,
-                borderRadius: 50,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
+              style={styles.pencilStyle}
               onPress={this._pickImage}
             >
-              <EvilIcons
-                name="pencil"
-                style={{
-                  fontSize: 40
-                }}
-              />
+              <EvilIcons name="pencil" style={{ fontSize: 40 }} />
             </TouchableOpacity>
           </View>
         </View>
-        <View
-          style={{
-            height: 80,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
+        <View style={styles.buttonBox}>
           <TouchableOpacity
-            style={{
-              height: 50,
-              width: 250,
-
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 20,
-              borderColor: "#F5DA81",
-              borderWidth: 1.5
-            }}
+            style={styles.buttonPress}
             onPress={() => {
               if (
                 this.state.image ==
@@ -186,14 +101,6 @@ class RegistrationStock extends React.Component {
               ) {
                 return alert("연필모양을 눌러 증권을 등록해주세요");
               }
-              // reducer에 데이터 추가하는 거 못해먹겠다.
-              // else {
-              //   this.props.dispatch({
-              //     type: "ADD_USER_STOCKIMAGE",
-              //     id: UserInsuranceID,
-              //     insuranceStockImage: this.state.image
-              //   });
-              // }
             }}
           >
             <Text> 증권 등록하기 </Text>
@@ -214,11 +121,6 @@ class RegistrationStock extends React.Component {
       this.setState({
         image: result.uri
       });
-      //   this.props.dispatch({
-      //     type: "ADD_USER_STOCKIMAGE",
-      //     StockImageId: this.insuranceNum,
-      //     image: result.uri
-      // });
     }
   };
 }
@@ -227,6 +129,71 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  viewBox: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  insuranceContentBox: {
+    height: 70,
+    width: "90%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderColor: "#D8D8D8",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 20
+  },
+  imageStyle: {
+    width: 50,
+    height: 50,
+    position: "absolute",
+    left: 15,
+    borderColor: "#E6E6E6",
+    borderWidth: 1,
+    borderRadius: 10
+  },
+  boxInBox: {
+    width: "100%",
+    paddingLeft: 90,
+    flexDirection: "column"
+  },
+  stockstyle: {
+    flex: 1,
+    paddingTop: 20,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  pencilStyle: {
+    backgroundColor: "white",
+    width: 50,
+    height: 50,
+    position: "absolute",
+    borderColor: "#D8D8D8",
+    borderWidth: 1,
+    bottom: 0,
+    right: 0,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonBox: {
+    height: 80,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonPress: {
+    height: 50,
+    width: 250,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+    borderColor: "#F5DA81",
+    borderWidth: 1.5
   }
 });
 

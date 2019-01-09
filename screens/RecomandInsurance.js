@@ -1,3 +1,4 @@
+//홈에서 추천보험 선택하면 나오는 화면
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 

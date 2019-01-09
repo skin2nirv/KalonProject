@@ -9,11 +9,7 @@ export default class CoinInfo extends React.Component {
       headerTitleStyle: { fontSize: 22, color: "white" },
       headerRight: (
         <TouchableOpacity
-          style={{
-            flexDirection: "column",
-            alignItems: "center",
-            paddingRight: 20
-          }}
+          style={styles.headerStyle}
           onPress={() => navigation.navigate("Home")}
           //왜 goBack()이 안 먹히지??
         >
@@ -37,5 +33,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  headerStyle: {
+    flexDirection: "column",
+    alignItems: "center",
+    paddingRight: 20
   }
 });

@@ -1,3 +1,5 @@
+//증권추가하기 누르면 나오는 화면
+
 import React from "react";
 import {
   StyleSheet,
@@ -10,6 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import JoininsuranceFlatList from "../components/JoinInsuranceFlatList";
 
 class InsuranceChoiceScreen extends React.Component {
   companyLogo(companyName) {
@@ -23,15 +26,7 @@ class InsuranceChoiceScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View
-          style={{
-            height: 50,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row"
-          }}
-        >
+        <View style={styles.textBox}>
           <MaterialCommunityIcons
             name="file-import"
             style={{ fontSize: 18, paddingRight: 3, color: "#F5DA81" }}
@@ -41,25 +36,10 @@ class InsuranceChoiceScreen extends React.Component {
         </View>
         <FlatList
           style={{ width: "100%" }}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: StyleSheet.hairlineWidth,
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "grey"
-              }}
-            />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
+            <JoininsuranceFlatList
               onPress={() => {
                 this.props.dispatch({
                   type: "ADD_CHOICEINSURANCE",
@@ -67,48 +47,11 @@ class InsuranceChoiceScreen extends React.Component {
                 }),
                   this.props.navigation.navigate("ClaimForInsurance");
               }}
-              // name: "국민 행복 암 보험",
-              // startDay: "18.06.29",
-              // contractor: "김정수",
-              // insured: " 김정수",
-              // price: "10000",
-              // insuranceCo: "메리츠"
-            >
-              <Image
-                style={{
-                  width: 50,
-                  height: 50,
-                  position: "absolute",
-                  left: 15,
-                  borderColor: "#E6E6E6",
-                  borderWidth: 1,
-                  borderRadius: 10
-                }}
-                source={{ uri: this.companyLogo(item.insuranceCo) }}
-              />
-              <View
-                style={{
-                  width: "100%",
-                  paddingLeft: 90,
-                  flexDirection: "column"
-                }}
-              >
-                <Text style={{ fontSize: 18 }}>{item.name}</Text>
-                <Text style={{ fontSize: 13, marginTop: 3 }}>
-                  {item.startDay}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  right: 20
-                }}
-              >
-                <Text style={{ fontSize: 12 }}>{item.price}원 </Text>
-              </View>
-              {console.log(this.companyLogo(item.insuranceCo))}
-            </TouchableOpacity>
+              uri={this.companyLogo(item.insuranceCo)}
+              name={item.name}
+              startDay={item.startDay}
+              price={item.price}
+            />
           )}
         />
       </ScrollView>
@@ -120,13 +63,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  textBox: {
+    height: 50,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  separatorLine: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
   }
 });
 
 const mapStateToProps = state => {
   return {
-    UserInfo: state.UserInfo,
-    RequestForISM: state.RequestForISM,
     UserInsuranceInfo: state.UserInsuranceInfo
   };
 };

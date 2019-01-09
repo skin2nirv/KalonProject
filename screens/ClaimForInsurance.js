@@ -1,3 +1,5 @@
+//청구하기 Tap 화면
+
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { connect } from "react-redux";
@@ -22,51 +24,15 @@ class ClaimForInsurance extends React.Component {
   render() {
     var item = this.props.ChoiceInsurance;
     return (
-      //  UserInfo: {
-      //     id: "kjs0629",
-      //     name: "김정수",
-      //     age: 30,
-      //     sex: "남자",
-      //     email: "jungsubabo@naver.com",
-      //     phonenumber: "010-4383-8890",
-      //     image:
-      //       "https://freecartok.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
-      //   },
-
       <View style={styles.container}>
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "#D8D8D8",
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.textBox}>
           <Text>보험금 청구하기</Text>
         </View>
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "#D8D8D8",
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.textBox}>
           <Text> 청구자 : {this.props.UserInfo.name}</Text>
         </View>
         <TouchableOpacity
-          style={{
-            height: 60,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "#D8D8D8",
-            borderWidth: 1
-          }}
+          style={styles.textBox}
           onPress={() => {
             this.props.navigation.navigate("InsuranceChoiceScreen");
           }}
@@ -74,70 +40,22 @@ class ClaimForInsurance extends React.Component {
           <Text> {item || "보험선택 click"} </Text>
         </TouchableOpacity>
 
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "#D8D8D8",
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.textBox}>
           <Text>보험 영수증 등록하기</Text>
         </View>
         <View style={{ height: 30 }} />
-
         <View style={{ width: 300, height: 300 }}>
           <Image
             source={{ uri: this.state.image }}
             style={{ borderRadius: 30, width: 290, height: 290 }}
           />
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: "white",
-              width: 50,
-              height: 50,
-              position: "absolute",
-              borderColor: "#D8D8D8",
-              borderWidth: 1,
-              bottom: 0,
-              right: 0,
-              borderRadius: 50,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-            onPress={this._pickImage}
-          >
-            <EvilIcons
-              name="pencil"
-              style={{
-                fontSize: 40
-              }}
-            />
+          <TouchableOpacity style={styles.addImage} onPress={this._pickImage}>
+            <EvilIcons name="pencil" style={{ fontSize: 40 }} />
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            height: 80,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
+        <View style={styles.buttonBox}>
           <TouchableOpacity
-            style={{
-              height: 50,
-              width: 250,
-
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 20,
-              borderColor: "#F5DA81",
-              borderWidth: 1.5
-            }}
+            style={styles.buttonStyle}
             onPress={() => {
               if (
                 this.state.image ==
@@ -145,14 +63,6 @@ class ClaimForInsurance extends React.Component {
               ) {
                 return alert("연필모양을 눌러 영수증을 등록해주세요");
               }
-              // reducer에 데이터 추가하는 거 못해먹겠다.
-              // else {
-              //   this.props.dispatch({
-              //     type: "ADD_USER_STOCKIMAGE",
-              //     id: UserInsuranceID,
-              //     insuranceStockImage: this.state.image
-              //   });
-              // }
             }}
           >
             <Text> 영수증 등록하기 </Text>
@@ -166,18 +76,11 @@ class ClaimForInsurance extends React.Component {
       allowsEditing: true,
       aspect: [4, 3]
     });
-
     console.log(result);
-
     if (!result.cancelled) {
       this.setState({
         image: result.uri
       });
-      //   this.props.dispatch({
-      //     type: "ADD_USER_STOCKIMAGE",
-      //     StockImageId: this.insuranceNum,
-      //     image: result.uri
-      // });
     }
   };
 }
@@ -188,6 +91,43 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start"
+  },
+  textBox: {
+    height: 60,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#D8D8D8",
+    borderWidth: 1
+  },
+  addImage: {
+    backgroundColor: "white",
+    width: 50,
+    height: 50,
+    position: "absolute",
+    borderColor: "#D8D8D8",
+    borderWidth: 1,
+    bottom: 0,
+    right: 0,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonBox: {
+    height: 80,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonStyle: {
+    height: 50,
+    width: 250,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+    borderColor: "#F5DA81",
+    borderWidth: 1.5
   }
 });
 

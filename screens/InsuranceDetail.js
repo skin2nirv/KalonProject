@@ -41,27 +41,7 @@ class InsuranceDetail extends React.Component {
     var item = this.props.navigation.getParam("item");
     return (
       <ScrollView style={styles.container}>
-        <View
-          style={{
-            height: 250,
-            width: "100%",
-            borderColor: "#E6E6E6",
-            borderWidth: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          {/* {
-        UserInsuranceID: 6,
-        insuranceId: 1111,
-        name: "인민 설사 보험 ",
-        startDay: "18.06.29",
-        contractor: "김정수",
-        insured: " 김정수",
-        price: "10000",
-        insuranceCo: "삼성",
-        insurancStock: false
-      } */}
+        <View style={styles.topImageBox}>
           <Image
             style={{ height: 150, width: 150 }}
             source={{ uri: this.companyLogo(item.insuranceCo) }}
@@ -74,16 +54,7 @@ class InsuranceDetail extends React.Component {
             월 {item.price}원
           </Text>
         </View>
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            backgroundColor: "#FAFAFA"
-          }}
-        >
+        <View style={styles.categoryDivision}>
           <MaterialCommunityIcons
             name="content-paste"
             style={{ fontSize: 20, color: "#F5DA81" }}
@@ -92,50 +63,17 @@ class InsuranceDetail extends React.Component {
         </View>
         <FlatList
           style={{ width: "100%" }}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: StyleSheet.hairlineWidth,
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "grey"
-              }}
-            />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.flatListStyle} />}
           data={this.props.InsuranceInfo.guaranteeContents}
           renderItem={({ item }) => (
-            <View
-              style={{
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
-              //   {
-              //     guranteeName: "무배당 가족보험",
-              //     detailPrice: 1200,
-              //     detailContent: "사랑, 질병"
-              //   },
-            >
-              <View
-                style={{
-                  width: "100%",
-                  paddingLeft: 20,
-                  flexDirection: "column"
-                }}
-              >
+            <View style={styles.flatListContainerBox}>
+              <View style={styles.fisrtTextBox}>
                 <Text style={{ fontSize: 18 }}>{item.guranteeName}</Text>
                 <Text style={{ fontSize: 13, marginTop: 3 }}>
                   {item.detailContent}
                 </Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  right: 20
-                }}
-              >
+              <View style={styles.secondTextBox}>
                 <Text style={{ fontSize: 15 }}>{item.detailPrice}</Text>
               </View>
             </View>
@@ -150,6 +88,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  topImageBox: {
+    height: 250,
+    width: "100%",
+    borderColor: "#E6E6E6",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  categoryDivision: {
+    height: 60,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    backgroundColor: "#FAFAFA"
+  },
+  flatListStyle: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  },
+  flatListContainerBox: {
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  fisrtTextBox: {
+    width: "100%",
+    paddingLeft: 20,
+    flexDirection: "column"
+  },
+  secondTextBox: {
+    flexDirection: "column",
+    position: "absolute",
+    right: 20
   }
 });
 

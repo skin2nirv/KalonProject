@@ -1,3 +1,4 @@
+//New 세부 정보
 import React, { Component } from "react";
 import { WebView } from "react-native";
 

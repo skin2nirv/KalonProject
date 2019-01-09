@@ -1,3 +1,5 @@
+//로그인 화면
+
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 

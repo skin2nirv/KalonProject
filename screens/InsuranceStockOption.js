@@ -1,4 +1,4 @@
-//미등록 증권 보험 내역을 보여주는 화면
+//증권 추가하기 누르면 미등록 증권 보험 내역을 보여주는 화면
 
 import React from "react";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
+import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
 
 class InsuranceStockOption extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -30,55 +31,20 @@ class InsuranceStockOption extends React.Component {
   }
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          width: "100%",
-          height: "100%"
-        }}
-      >
-        <View
-          style={{
-            height: 70,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            paddingLeft: 15
-          }}
-        >
+      <View style={styles.container}>
+        <View style={styles.textBox}>
           <Text style={{ fontSize: 20 }}>보험</Text>
           <Text>(미등록 증권)</Text>
         </View>
-        <View
-          style={{
-            height: 2,
-            marginLeft: 20,
-            marginRight: 20,
-            backgroundColor: "#F5DA81"
-          }}
-        />
+        <View style={styles.separatorLine} />
         <FlatList
           style={{ width: "100%" }}
           ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: StyleSheet.hairlineWidth,
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "grey"
-              }}
-            />
+            <View style={styles.itemSeparatorLine} />
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
+            <JoininsuranceFlatList
               onPress={() =>
                 this.props.navigation.navigate("RegistrationStock", {
                   name: item.name,
@@ -87,47 +53,11 @@ class InsuranceStockOption extends React.Component {
                   UserInsuranceID: item.UserInsuranceID
                 })
               }
-              // name: "국민 행복 암 보험",
-              // startDay: "18.06.29",
-              // contractor: "김정수",
-              // insured: " 김정수",
-              // price: "10000",
-              // insuranceCo: "메리츠"
-            >
-              <Image
-                style={{
-                  width: 50,
-                  height: 50,
-                  position: "absolute",
-                  left: 15,
-                  borderColor: "#E6E6E6",
-                  borderWidth: 1,
-                  borderRadius: 10
-                }}
-                source={{ uri: this.companyLogo(item.insuranceCo) }}
-              />
-              <View
-                style={{
-                  width: "100%",
-                  paddingLeft: 90,
-                  flexDirection: "column"
-                }}
-              >
-                <Text style={{ fontSize: 18 }}>{item.name}</Text>
-                <Text style={{ fontSize: 13, marginTop: 3 }}>
-                  {item.startDay}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  right: 20
-                }}
-              >
-                <Text style={{ fontSize: 12 }}>{item.price}원 </Text>
-              </View>
-            </TouchableOpacity>
+              uri={this.companyLogo(item.insuranceCo)}
+              name={item.name}
+              startDay={item.startDay}
+              price={item.price}
+            />
           )}
         />
       </View>
@@ -149,5 +79,33 @@ const mapStateToProps = state => {
     ])
   };
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    height: "100%"
+  },
+  textBox: {
+    height: 70,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingLeft: 15
+  },
+  separatorLine: {
+    height: 2,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "#F5DA81"
+  },
+  itemSeparatorLine: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  }
+});
 
 export default connect(mapStateToProps)(InsuranceStockOption);

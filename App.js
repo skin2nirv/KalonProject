@@ -1,9 +1,3 @@
-// Project 기본 사항.
-// App이름 : KALON
-// 기본색상 : #F5DA81 (navigation header color - 노란색)
-// backUpColor : #F7D358 (조금 진한 노란색)
-// 배경 회색 : #D8D8D8
-
 import React from "react";
 import {} from "react-native";
 import {
@@ -39,21 +33,11 @@ import InsurancePlannerDetail from "./screens/InsurancePlannerDetail";
 import InsuranceChoiceScreen from "./screens/InsuranceChoiceScreen";
 //import Test from "./screens/Test";
 
-// 할일
-//1. async storage 설정하기
-//2. 소비자가 작성한 댓글 추가하기
-//3. 화면 뒤로가기 구성하기(현재 navigation option 중 goBack이 안먹힘.. 왜 ???)
-//4. 로그인 화면, 증권추가하기, CoinInfo화면 모달형식으로 빼기 [화면 전환 UI상태 다시 기획할 필요가 있음.]
-//5. 증권과 보험금청구내역 해쉬값으로 표시하는 방식 추가하기. 그냥 내 보험 내역에 증권의 해쉬값을 표시하는 형태로?
-//
-
 let store = createStore(reducer);
 
 const homeStack = createStackNavigator({
-  Home: Home, // Home 으로 바꿀 것
-  Login: {
-    screen: Login
-  },
+  Home: Myinfo, // Home 으로 바꿀 것
+  Login: Login,
   Detail: HomeDetail,
   ClaimForInsurance: ClaimForInsurance,
   Planner: Planner,
@@ -84,9 +68,6 @@ const ClaimForInsuranceStack = createStackNavigator({
   InsuranceChoiceScreen: InsuranceChoiceScreen // 이화면 모달로 처리하기
 });
 
-// 스택에 들어가야지 header 값이 생긴다.
-//
-
 const PlannerStack = createStackNavigator({
   Planner: Planner,
   SearchPlanner: SearchPlanner,
@@ -95,9 +76,8 @@ const PlannerStack = createStackNavigator({
 const TabNavigator = createBottomTabNavigator(
   {
     홈: homeStack,
-    //분석: HomeDetail,
     청구: ClaimForInsuranceStack,
-    설계사: PlannerStack, //PlannerStack으로 바꿀것
+    설계사: PlannerStack,
     내정보: MyInfoStack
   },
   {

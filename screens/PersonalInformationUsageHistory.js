@@ -1,3 +1,4 @@
+//개인정보 이용내역 눌렀을 때 나오는 화면
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 

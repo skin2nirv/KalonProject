@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Button,
   Image
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -17,6 +16,8 @@ import _ from "lodash";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Modal from "react-native-modal";
+import ModalFlatList from "../components/ModalFlatList";
+import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
 
 class Myinfo extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -51,14 +52,7 @@ class Myinfo extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-        <View
-          style={{
-            flex: 1,
-            paddingTop: 20,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
+        <View style={styles.privateDataBox}>
           <View style={{ width: 105, height: 105 }}>
             {image && (
               <Image
@@ -67,19 +61,7 @@ class Myinfo extends React.Component {
               />
             )}
             <TouchableOpacity
-              style={{
-                backgroundColor: "white",
-                width: 30,
-                height: 30,
-                position: "absolute",
-                borderColor: "#D8D8D8",
-                borderWidth: 1,
-                bottom: 0,
-                right: 0,
-                borderRadius: 50,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
+              style={styles.pencilBox}
               onPress={this._pickImage}
             >
               <EvilIcons
@@ -90,54 +72,22 @@ class Myinfo extends React.Component {
               />
             </TouchableOpacity>
           </View>
-          <View
-            style={{
-              height: 100,
-              width: "100%",
-
-              paddingTop: 15,
-              justifyContent: "flex-start",
-              alignItems: "center"
-            }}
-          >
+          <View style={styles.nameBox}>
             <Text style={{ fontSize: 25 }}>{this.props.UserInfo.name}</Text>
-            <View
-              style={{
-                marginTop: 10,
-                justifyContent: "center",
-                alignItems: "center",
-                borderColor: "#F2F2F2",
-                borderWidth: 0.5,
-                paddingLeft: 10,
-                paddingRight: 10,
-                borderRadius: 5,
-                paddingTop: 5,
-                paddingBottom: 5
-              }}
-            >
+            <View style={styles.emailBox}>
               <Text style={{ fontSize: 15 }}>{this.props.UserInfo.email}</Text>
             </View>
           </View>
         </View>
-        <View
-          style={{
-            height: 80,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
+        <View style={styles.threeButtonBox}>
           <TouchableOpacity
-            style={{
-              height: 50,
-              width: 110,
-              backgroundColor: "#F2F2F2",
-              justifyContent: "center",
-              alignItems: "center",
-              borderTopLeftRadius: 10,
-              borderBottomLeftRadius: 10
-            }}
+            style={[
+              styles.threeButton,
+              {
+                borderTopLeftRadius: 10,
+                borderBottomLeftRadius: 10
+              }
+            ]}
             onPress={() =>
               this.props.navigation.navigate("InsuranceStockOption")
             }
@@ -145,41 +95,25 @@ class Myinfo extends React.Component {
             <Text style={{ textAlign: "center" }}>증권추가</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              height: 50,
-              width: 110,
-              backgroundColor: "#F2F2F2",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
+            style={styles.threeButton}
             onPress={() => this.props.navigation.navigate("CoinInfo")}
           >
             <Text style={{ textAlign: "center" }}>보유코인</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              height: 50,
-              width: 110,
-              backgroundColor: "#F2F2F2",
-              justifyContent: "center",
-              alignItems: "center",
-              borderTopRightRadius: 10,
-              borderBottomRightRadius: 10
-            }}
+            style={[
+              styles.threeButton,
+              {
+                borderTopRightRadius: 10,
+                borderBottomRightRadius: 10
+              }
+            ]}
             onPress={() => this.props.navigation.navigate("PrivateData")}
           >
             <Text style={{ textAlign: "center" }}>개인정보</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            height: 50,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row"
-          }}
-        >
+        <View style={styles.claimText}>
           <Entypo
             name="export"
             style={{ fontSize: 18, paddingRight: 3, color: "#F5DA81" }}
@@ -188,196 +122,42 @@ class Myinfo extends React.Component {
         </View>
         <FlatList
           style={{ width: "100%" }}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: StyleSheet.hairlineWidth,
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "grey"
-              }}
-            />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.itemSparator} />}
           data={this.props.RequestForISM}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
+            <ModalFlatList
               onPress={() => {
                 this.setState(
                   {
                     onPressItem: item
                   },
-
                   this._toggleModal
                 );
               }}
-
-              //   accidentName: "교통사고",
-              //   accidentDay: "18.06.29",
-              //   requestDay: "180629",
-              //   accidentNum: "045sDSF456",
-              //   insuranceName: " 김정수",
-              //   insuranceCo: "국민"
-              // },
-            >
-              <Modal isVisible={this.state.isModalVisible}>
-                <View
-                  style={{
-                    paddingLeft: 20,
-                    height: 500,
-                    width: 300,
-                    backgroundColor: "white",
-                    borderRadius: 20,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "absolute",
-                    left: 18
-                  }}
-                >
-                  <AntDesign
-                    style={{ fontSize: 30, color: "#F5DA81", marginBottom: 10 }}
-                    name="customerservice"
-                  />
-                  <Text style={{ fontSize: 20 }}>청구세부내역</Text>
-                  <Image
-                    style={{
-                      width: 100,
-                      height: 100,
-                      marginBottom: 40,
-                      marginTop: 20,
-                      borderColor: "#E6E6E6",
-                      borderWidth: 1,
-                      borderRadius: 10
-                    }}
-                    source={{
-                      uri: this.companyLogo(this.state.onPressItem.insuranceCo)
-                    }}
-                  />
-                  <View style={{ width: "100%" }}>
-                    <Text style={{ fontSize: 20, padding: 5 }}>
-                      사고내역 : {this.state.onPressItem.accidentName}
-                    </Text>
-                    <View
-                      style={{
-                        height: StyleSheet.hairlineWidth,
-                        marginRight: 17,
-                        backgroundColor: "grey"
-                      }}
-                    />
-                    <Text style={{ fontSize: 20, padding: 5 }}>
-                      사고일자 : {this.state.onPressItem.accidentDay}
-                    </Text>
-                    <View
-                      style={{
-                        height: StyleSheet.hairlineWidth,
-                        marginRight: 17,
-                        backgroundColor: "grey"
-                      }}
-                    />
-                    <Text style={{ fontSize: 20, padding: 5 }}>
-                      요청일자 : {this.state.onPressItem.requestDay}
-                    </Text>
-                    <View
-                      style={{
-                        height: StyleSheet.hairlineWidth,
-                        marginRight: 17,
-                        backgroundColor: "grey"
-                      }}
-                    />
-                    <Text style={{ fontSize: 20, padding: 5 }}>
-                      현설계사 : {this.state.onPressItem.insuranceName}
-                    </Text>
-                    <View
-                      style={{
-                        height: StyleSheet.hairlineWidth,
-                        marginRight: 17,
-                        backgroundColor: "grey"
-                      }}
-                    />
-                    <Text style={{ fontSize: 20, padding: 5 }}>
-                      지급상황 :{" "}
-                      {this.state.onPressItem.stateReceive == false
-                        ? "미지급"
-                        : this.state.onPressItem.stateReceive}
-                    </Text>
-                  </View>
-                  <TouchableOpacity
-                    style={{ position: "absolute", top: 20, right: 20 }}
-                    onPress={this._toggleModal}
-                    //   accidentName: "교통사고",
-                    //   accidentDay: "18.06.29",
-                    //   requestDay: "180629",
-                    //   accidentNum: "045sDSF456",
-                    //   insuranceName: " 김정수",
-                    //   insuranceCo: "국민"
-                    //   stateReceive : fauls
-                    // },
-                  >
-                    <AntDesign style={{ fontSize: 20 }} name="closecircleo" />
-                  </TouchableOpacity>
-                </View>
-              </Modal>
-              <Image
-                style={{
-                  width: 50,
-                  height: 50,
-                  position: "absolute",
-                  left: 15,
-                  borderColor: "#E6E6E6",
-                  borderWidth: 1,
-                  borderRadius: 10
-                }}
-                source={{ uri: this.companyLogo(item.insuranceCo) }}
-              />
-              <View
-                style={{
-                  width: "100%",
-                  paddingLeft: 90,
-                  flexDirection: "column"
-                }}
-              >
-                <Text style={{ fontSize: 18 }}>{item.accidentName}</Text>
-                <Text style={{ fontSize: 13, marginTop: 3 }}>
-                  {item.accidentDay}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  right: 20
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {item.stateReceive ? "+" + item.stateReceive : "미지급"}
-                </Text>
-              </View>
-              {console.log(this.companyLogo(item.insuranceCo))}
-            </TouchableOpacity>
+              isVisible={this.state.isModalVisible}
+              uri={this.companyLogo(this.state.onPressItem.insuranceCo)}
+              accidentName={this.state.onPressItem.accidentName}
+              accidentDay={this.state.onPressItem.accidentDay}
+              requestDay={this.state.onPressItem.requestDay}
+              insuranceName={this.state.onPressItem.insuranceName}
+              stateReceive={
+                this.state.onPressItem.stateReceive == false
+                  ? "미지급"
+                  : this.state.onPressItem.stateReceive
+              }
+              onPressToggle={this._toggleModal}
+              companyLogo={this.companyLogo(item.insuranceCo)}
+              secondAccidentName={item.accidentName}
+              secondAccidentDay={item.accidentDay}
+              secondStateReceive={
+                item.stateReceive ? "+" + item.stateReceive : "미지급"
+              }
+            />
           )}
         />
-        <View
-          style={{
-            height: StyleSheet.hairlineWidth,
-            marginLeft: 20,
-            marginRight: 20,
-            backgroundColor: "grey"
-          }}
-        />
+        <View style={styles.moreScreenBox} />
         <TouchableOpacity
-          style={{
-            height: 50,
-            justifyContent: "center",
-            alignItems: "flex-start",
-            paddingLeft: 5,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+          style={styles.moreScreenTouch}
           onPress={() => {
             this.props.navigation.navigate("MoreScreenOfClaim");
           }}
@@ -385,14 +165,7 @@ class Myinfo extends React.Component {
           <Text style={{ fontSize: 10 }}>더보기></Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            height: 100,
-            width: "100%",
-            borderColor: "#F2F2F2",
-            borderWidth: 8,
-            backgroundColor: "#F7F8E0",
-            flexDirection: "row"
-          }}
+          style={styles.advertisementBox}
           onPress={() => {
             this.props.navigation.navigate("MyWeb", {
               itemUri: "https://www.kbli.co.kr/CUCO/CUCO10010M.do"
@@ -407,15 +180,7 @@ class Myinfo extends React.Component {
             style={{ width: "100%", height: "100%" }}
           />
         </TouchableOpacity>
-        <View
-          style={{
-            height: 50,
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row"
-          }}
-        >
+        <View style={styles.joinInsuranceBox}>
           <MaterialCommunityIcons
             name="file-import"
             style={{ fontSize: 18, paddingRight: 3, color: "#F5DA81" }}
@@ -426,90 +191,26 @@ class Myinfo extends React.Component {
         <FlatList
           style={{ width: "100%" }}
           ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: StyleSheet.hairlineWidth,
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "grey"
-              }}
-            />
+            <View style={styles.itemSeparatorView} />
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
+            <JoininsuranceFlatList
               onPress={() =>
                 this.props.navigation.navigate("InsuranceDetail", {
                   item: item
                 })
               }
-              // name: "국민 행복 암 보험",
-              // startDay: "18.06.29",
-              // contractor: "김정수",
-              // insured: " 김정수",
-              // price: "10000",
-              // insuranceCo: "메리츠"
-            >
-              <Image
-                style={{
-                  width: 50,
-                  height: 50,
-                  position: "absolute",
-                  left: 15,
-                  borderColor: "#E6E6E6",
-                  borderWidth: 1,
-                  borderRadius: 10
-                }}
-                source={{ uri: this.companyLogo(item.insuranceCo) }}
-              />
-              <View
-                style={{
-                  width: "100%",
-                  paddingLeft: 90,
-                  flexDirection: "column"
-                }}
-              >
-                <Text style={{ fontSize: 18 }}>{item.name}</Text>
-                <Text style={{ fontSize: 13, marginTop: 3 }}>
-                  {item.startDay}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  right: 20
-                }}
-              >
-                <Text style={{ fontSize: 12 }}>{item.price}원 </Text>
-              </View>
-              {console.log(this.companyLogo(item.insuranceCo))}
-            </TouchableOpacity>
+              uri={this.companyLogo(item.insuranceCo)}
+              name={item.name}
+              startDay={item.startDay}
+              price={item.price}
+            />
           )}
         />
-        <View
-          style={{
-            height: StyleSheet.hairlineWidth,
-            marginLeft: 20,
-            marginRight: 20,
-            backgroundColor: "grey"
-          }}
-        />
+        <View style={styles.moreViewBox} />
         <TouchableOpacity
-          style={{
-            height: 50,
-            justifyContent: "center",
-            alignItems: "flex-start",
-            paddingLeft: 5,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+          style={styles.moreViewTouchBox}
           onPress={() => {
             this.props.navigation.navigate("MoreScreenOfMyInsurance");
           }}
@@ -540,6 +241,120 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  privateDataBox: {
+    flex: 1,
+    paddingTop: 20,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  pencilBox: {
+    backgroundColor: "white",
+    width: 30,
+    height: 30,
+    position: "absolute",
+    borderColor: "#D8D8D8",
+    borderWidth: 1,
+    bottom: 0,
+    right: 0,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  nameBox: {
+    height: 100,
+    width: "100%",
+    paddingTop: 15,
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  emailBox: {
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#F2F2F2",
+    borderWidth: 0.5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 5,
+    paddingTop: 5,
+    paddingBottom: 5
+  },
+  threeButtonBox: {
+    height: 80,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  threeButton: {
+    height: 50,
+    width: 110,
+    backgroundColor: "#F2F2F2",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  claimText: {
+    height: 50,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  itemSparator: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  },
+  moreScreenBox: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  },
+  moreScreenTouch: {
+    height: 50,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 5,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  advertisementBox: {
+    height: 100,
+    width: "100%",
+    borderColor: "#F2F2F2",
+    borderWidth: 8,
+    backgroundColor: "#F7F8E0",
+    flexDirection: "row"
+  },
+  joinInsuranceBox: {
+    height: 50,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  itemSeparatorView: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  },
+  moreViewBox: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "grey"
+  },
+  moreViewTouchBox: {
+    height: 50,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 5,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 
