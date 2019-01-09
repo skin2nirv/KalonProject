@@ -36,7 +36,7 @@ import InsuranceChoiceScreen from "./screens/InsuranceChoiceScreen";
 let store = createStore(reducer);
 
 const homeStack = createStackNavigator({
-  Home: Myinfo, // Home 으로 바꿀 것
+  Home: Home, // Home 으로 바꿀 것
   Login: Login,
   Detail: HomeDetail,
   ClaimForInsurance: ClaimForInsurance,
