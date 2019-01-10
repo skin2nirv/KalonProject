@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
-import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
+import JoininsuranceFlatLists from "../components/JoininsuranceFlatLists";
 import CustomerCommentsFlatList from "../components/CustomerCommentsFlatList";
 
 class InsurancePlannerDetail extends React.Component {
@@ -81,7 +81,7 @@ class InsurancePlannerDetail extends React.Component {
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <JoininsuranceFlatList
+            <JoininsuranceFlatLists
               uri={this.companyLogo(item.insuranceCo)}
               name={item.name}
               startDay={item.startDay}

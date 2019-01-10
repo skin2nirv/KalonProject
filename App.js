@@ -1,5 +1,4 @@
 import React from "react";
-import {} from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -7,14 +6,13 @@ import {
 } from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Home from "./screens/Home";
-import ClaimForInsurance from "./screens/ClaimForInsurance";
-import Myinfo from "./screens/Myinfo";
-import HomeDetail from "./screens/HomeDetail";
-import Planner from "./screens/Planner";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import Planner from "./screens/Planner";
+import Home from "./screens/Home";
+import Myinfo from "./screens/Myinfo";
+import HomeDetail from "./screens/HomeDetail";
 import MyWeb from "./screens/MyWeb";
 import Login from "./screens/Login";
 import CoinInfo from "./screens/CoinInfo";
@@ -31,6 +29,7 @@ import MoreScreenOfMyInsurance from "./screens/MoreScreenOfMyInsurance";
 import SearchPlanner from "./screens/SearchPlanner";
 import InsurancePlannerDetail from "./screens/InsurancePlannerDetail";
 import InsuranceChoiceScreen from "./screens/InsuranceChoiceScreen";
+import ClaimForInsurance from "./screens/ClaimForInsurance";
 //import Test from "./screens/Test";
 
 let store = createStore(reducer);

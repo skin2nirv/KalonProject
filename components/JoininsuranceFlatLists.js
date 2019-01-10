@@ -1,10 +1,9 @@
-// Myinfo Tab에서 사용되는 PlannerFlatList
+
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
-import _ from "lodash";
 
-class JoininsuranceFlatList extends React.Component {
+class JoininsuranceFlatLists extends React.Component {
   render() {
     return (
       <TouchableOpacity
@@ -54,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JoininsuranceFlatList;
+export default JoininsuranceFlatLists;

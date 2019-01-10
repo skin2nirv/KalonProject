@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import JoininsuranceFlatList from "../components/JoinInsuranceFlatList";
+import JoininsuranceFlatLists from "../components/JoininsuranceFlatLists";
 
 class InsuranceChoiceScreen extends React.Component {
   companyLogo(companyName) {
@@ -39,7 +39,7 @@ class InsuranceChoiceScreen extends React.Component {
           ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <JoininsuranceFlatList
+            <JoininsuranceFlatLists
               onPress={() => {
                 this.props.dispatch({
                   type: "ADD_CHOICEINSURANCE",

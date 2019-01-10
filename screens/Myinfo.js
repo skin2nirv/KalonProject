@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import { ImagePicker, Permissions } from "expo";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { connect } from "react-redux";
@@ -15,9 +14,8 @@ import { FlatList } from "react-native-gesture-handler";
 import _ from "lodash";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Modal from "react-native-modal";
 import ModalFlatList from "../components/ModalFlatList";
-import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
+import JoininsuranceFlatLists from "../components/JoininsuranceFlatLists";
 
 class Myinfo extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -195,7 +193,7 @@ class Myinfo extends React.Component {
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <JoininsuranceFlatList
+            <JoininsuranceFlatLists
               onPress={() =>
                 this.props.navigation.navigate("InsuranceDetail", {
                   item: item

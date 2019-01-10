@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
-import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
+import JoininsuranceFlatLists from "../components/JoininsuranceFlatLists";
 
 class InsuranceStockOption extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -44,7 +44,7 @@ class InsuranceStockOption extends React.Component {
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <JoininsuranceFlatList
+            <JoininsuranceFlatLists
               onPress={() =>
                 this.props.navigation.navigate("RegistrationStock", {
                   name: item.name,

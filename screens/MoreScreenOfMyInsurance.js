@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import JoininsuranceFlatList from "../components/JoininsuranceFlatList";
+import JoininsuranceFlatLists from "../components/JoininsuranceFlatLists";
 
 class MoreScreenOfMyInsurance extends React.Component {
   companyLogo(companyName) {
@@ -39,7 +39,7 @@ class MoreScreenOfMyInsurance extends React.Component {
           )}
           data={this.props.UserInsuranceInfo}
           renderItem={({ item }) => (
-            <JoininsuranceFlatList
+            <JoininsuranceFlatLists
               onPress={() =>
                 this.props.navigation.navigate("InsuranceDetail", {
                   item: item
